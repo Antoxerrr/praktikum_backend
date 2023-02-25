@@ -11,7 +11,9 @@ AUTH_USER_MODEL = 'users.User'
 
 # TODO: Исправить эту бадягу
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*']
+CSRF_TRUSTED_ORIGINS = ['https://backend.praktikum.antoxer.ru/']
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 LOCAL_APPS = [
     'users',
@@ -21,7 +23,8 @@ LOCAL_APPS = [
 THIRD_PARTY_APPS = [
     'drf_yasg',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 INSTALLED_APPS = [
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
 ] + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
