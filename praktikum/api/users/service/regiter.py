@@ -32,4 +32,4 @@ class Registerer:
     @classmethod
     def _perform_registration(cls, user_data: dict) -> None:
         """Регистрация пользователя."""
-        User.objects.create(**user_data)
+        User.objects.create_user(**user_data, is_active=True)
