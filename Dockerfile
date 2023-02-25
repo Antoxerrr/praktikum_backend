@@ -24,5 +24,5 @@ RUN pip install uvicorn
 WORKDIR $APP_SOURCES
 
 RUN sed -i 's/\r$//g' $APP_HOME/entrypoint.sh
-RUN chmod +x $APP_HOME/entrypoint.sh
-ENTRYPOINT ["$APP_HOME/entrypoint.sh"]
+RUN chmod +x /home/app/entrypoint.sh
+ENTRYPOINT ["/home/app/entrypoint.sh"]
