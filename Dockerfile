@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 ENV APP_HOME=/home/app
-ENV APP_SOURCES=/home/app/academy
+ENV APP_SOURCES=/home/app/praktikum
 RUN mkdir $APP_HOME
 
 # Создаем файл под django логи
