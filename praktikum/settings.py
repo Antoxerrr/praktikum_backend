@@ -9,7 +9,9 @@ DEBUG = os.getenv('DEBUG', '').lower() == 'true'
 
 AUTH_USER_MODEL = 'users.User'
 
+# TODO: Исправить эту бадягу
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*']
 
 LOCAL_APPS = [
     'users',
