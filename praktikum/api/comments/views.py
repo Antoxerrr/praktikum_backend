@@ -13,7 +13,7 @@ class CommentsViewSet(ModelViewSet):
     serializer_class = CommentTemplateSerializer
 
     def get_queryset(self):
-        return self.request.user.comments.all()
+        return self.request.user.comments.order_by('-created')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
