@@ -28,6 +28,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_filters'
 ]
 
 INSTALLED_APPS = [

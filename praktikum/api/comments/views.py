@@ -1,7 +1,9 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
+from api.comments.filters import CommentsFilter
 from api.comments.serializers import (
     CommentTemplateSerializer, GetProjectSerializer,
     CreateEditCommentTemplateSerializer
@@ -14,8 +16,9 @@ class CommentsViewSet(ModelViewSet):
 
     permission_classes = (IsAuthenticated,)
     serializer_class = CommentTemplateSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['text']
+    filterset_class = CommentsFilter
 
     def get_queryset(self):
         return self.request.user.comments.order_by('-created')
