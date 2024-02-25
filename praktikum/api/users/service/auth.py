@@ -20,8 +20,3 @@ class Authenticator:
         if user is not None:
             return user, cls._generate_access_token(user)
         raise ValidationError(cls.WRONG_CREDENTIALS)
-
-    @classmethod
-    def logout(cls, token):
-        """Логаут пользователя."""
-        Token.objects.filter(key=token).delete()

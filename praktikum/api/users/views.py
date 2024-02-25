@@ -33,7 +33,7 @@ class AuthViewSet(ViewSet):
 
     @swagger_auto_schema(
         request_body=LoginSerializer,
-        responses={status.HTTP_200_OK: LoginResponseSerializer}
+        responses={status.HTTP_200_OK: LoginResponseSerializer()}
     )
     @action(methods=('post',), detail=False)
     def login(self, request):
@@ -51,19 +51,3 @@ class AuthViewSet(ViewSet):
         return Response(
             data=serializer.validated_data, status=status.HTTP_200_OK
         )
-
-    @swagger_auto_schema(
-        responses={
-            status.HTTP_200_OK: 'success',
-            status.HTTP_401_UNAUTHORIZED: 'unauthorized'
-        }
-    )
-    @action(methods=('post',), detail=False)
-    def logout(self, request):
-        """Логаут пользователя."""
-        if not request.user.is_authenticated or request.auth is None:
-            response = Response(status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            Authenticator.logout(request.auth.key)
-            response = Response(status=status.HTTP_200_OK)
-        return response

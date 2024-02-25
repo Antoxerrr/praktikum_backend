@@ -27,3 +27,6 @@ class CreateEditCommentTemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommentTemplate
         fields = ('text', 'project')
+
+    def to_representation(self, instance):
+        return CommentTemplateSerializer(instance).data

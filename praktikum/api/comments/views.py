@@ -1,8 +1,11 @@
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from api.comments.serializers import CommentTemplateSerializer, \
-    GetProjectSerializer, CreateEditCommentTemplateSerializer
+from api.comments.serializers import (
+    CommentTemplateSerializer, GetProjectSerializer,
+    CreateEditCommentTemplateSerializer
+)
 from comments.models import Project
 
 
@@ -11,6 +14,8 @@ class CommentsViewSet(ModelViewSet):
 
     permission_classes = (IsAuthenticated,)
     serializer_class = CommentTemplateSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['text']
 
     def get_queryset(self):
         return self.request.user.comments.order_by('-created')
@@ -30,3 +35,5 @@ class ProjectsViewSet(ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = GetProjectSerializer
     queryset = Project.objects
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
